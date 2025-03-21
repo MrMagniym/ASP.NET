@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "main", "HW3_Tests" ]
+    branches: [ "main", "HW4_Docker" ]
   pull_request:
-    branches: [ "main", "HW3_Tests" ]
+    branches: [ "main", "HW4_Docker" ]
 
 env:
   WORK_DIR: ./Homeworks/UnitTests/src
