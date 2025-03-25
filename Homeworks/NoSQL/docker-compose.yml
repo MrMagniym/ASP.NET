@@ -1,0 +1,26 @@
+services:
+
+  # MongoDB контейнер
+  promocode-factory-administration-db:
+    image: mongo:latest
+    container_name: promocode-factory-administration-db
+    ports:
+      - "2717:27017"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: docker
+      MONGO_INITDB_DATABASE: promocode_factory_administration_db
+
+  # API сервис
+  promocode-factory-administration-api:
+    build: src/Pcf.Administration/
+    container_name: promocode-factory-administration-api
+    restart: always
+    ports:
+      - "8091:8080"
+    environment:
+      - MongoDB__ConnectionString=mongodb://admin:docker@promocode-factory-administration-db:27017
+      - MongoDB__DatabaseName=promocode_factory_administration_db
+    depends_on:
+      - promocode-factory-administration-db
