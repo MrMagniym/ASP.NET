@@ -17,7 +17,5 @@ namespace Pcf.Integration.Dto
         public string BeginDate { get; set; }
 
         public string EndDate { get; set; }
-
-        public Guid? PartnerManagerId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Pcf.Administration.Core.Abstractions.Services;
 using Pcf.Administration.Core.Domain.Administration;
 using Pcf.Administration.DataAccess.Repositories;
 using Pcf.Administration.WebHost.Controllers;
@@ -13,11 +14,12 @@ namespace Pcf.Administration.IntegrationTests.Components.WebHost.Controllers
     {
         private EfRepository<Employee> _employeesRepository;
         private EmployeesController _employeesController;
+        private IPromoCodeService _promoCodeService;
 
         public EmployeesControllerTests(EfDatabaseFixture efDatabaseFixture)
         {
             _employeesRepository = new EfRepository<Employee>(efDatabaseFixture.DbContext);
-            _employeesController = new EmployeesController(_employeesRepository);
+            _employeesController = new EmployeesController(_employeesRepository, _promoCodeService);
         }
 
         [Fact]
