@@ -1,0 +1,28 @@
+syntax = "proto3";
+ 
+option csharp_namespace = "Pcf";
+ 
+package promocode;
+
+message UUID{
+    string Value = 1;
+}
+ 
+message Request{
+        string service_info = 1;
+        UUID partner_id = 2;
+        UUID promo_code_id = 3;
+        string promo_code = 4;
+        UUID preference_id = 5;
+        string begin_date = 6;
+        string end_date = 7;
+}
+ 
+message Response{
+    bool result = 1;
+    string message = 2;
+}
+ 
+service PromocodeCreator {
+  rpc Create (Request) returns (Response);
+}

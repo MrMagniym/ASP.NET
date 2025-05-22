@@ -13,14 +13,9 @@ using System;
 
 namespace Pcf.Administration.WebHost
 {
-    public class Startup
+    public class Startup(IConfiguration configuration)
     {
-        public IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public IConfiguration Configuration { get; } = configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -33,7 +28,7 @@ namespace Pcf.Administration.WebHost
             services.AddDbContext<DataContext>(x =>
             {
                 //x.UseSqlite("Filename=PromocodeFactoryAdministrationDb.sqlite");
-                x.UseNpgsql(Configuration.GetConnectionString("PromocodeFactoryAdministrationDb"));
+                x.UseNpgsql(Configuration.GetSection("ConnectionStrings").GetValue<string>("PromocodeFactoryAdministrationDb"));
                 x.UseSnakeCaseNamingConvention();
                 x.UseLazyLoadingProxies();
             });
